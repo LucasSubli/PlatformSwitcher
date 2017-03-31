@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Blueprint/UserWidget.h"
 #include "GameFramework/GameMode.h"
 #include "MainGameMode.generated.h"
 
@@ -22,6 +23,21 @@ public:
 
 	void OnSwitch();
 
+	void OnRestart();
+
+	void OnGameOver(bool Win);
+
+	UFUNCTION(BlueprintCallable, Category = "UMG Game")
+	void ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass);
+
 	bool Switched;
+
+protected:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UMG Game")
+	TSubclassOf<UUserWidget> StartingWindgetClass;
+
+	UPROPERTY()
+	UUserWidget* CurrentWidget;
 	
 };
